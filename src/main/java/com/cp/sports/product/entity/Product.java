@@ -49,7 +49,7 @@ public class Product {
 	private LocalDate estimatedDelivery;
 
 	@OneToMany(cascade = { CascadeType.ALL }, fetch = FetchType.EAGER)
-	@JoinColumn(name = "cart_id", referencedColumnName = "ID")
+	@JoinColumn(name = "cartId", referencedColumnName = "ID")
 	private Cart cart;
 
 	public String getProductId() {
