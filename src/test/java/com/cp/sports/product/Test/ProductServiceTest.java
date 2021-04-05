@@ -1,11 +1,10 @@
 package com.cp.sports.product.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,22 +18,28 @@ import com.cp.sports.product.service.ProductService;
 public class ProductServiceTest {
 	@Autowired
 	private ProductService productservice;
-	private Product product;
+	
+	static ArrayList<Product> list = new ArrayList<>();
 
 	@Test
-	void updateProductTest() {
-		System.out.println(productservice.updateProduct("1235", product));
-		assertEquals(
-				"Product [ productId=1235,productName=FootBall,category=Ball, description=WaterResistent OuterMaterial Rubber,brand=Vector X Attacker,"
-						+ "color=MultiColor,mrp=549,discount=51,priceAfterDiscount=269,inStock=true, estimatedDelivery=2021-03-27,size=6ft]",
-				productservice.updateProduct("1234", product).toString());
+	void updateProductTest()  {
+		Product uptest1= new Product( "1235", "BackPack" , "Bag", "Full space", "Levis" ,
+				"Burgundy",  " full length",  "790rs", 24, 450.0, true,
+				LocalDate.of(2021, 04, 12));
+		assertEquals("1235", productservice.updateProduct("1235", uptest1).getProductId());
+		
 	}
 
 	@Test
 	void addProductTest() {
-		assertNotNull(product.getProductId());
-		System.out.println(productservice.getProduct("1235"));
-		System.out.println(productservice.getAllProduct().size());
+		LocalDate deliveryDate = LocalDate.parse("2021-04-07");
+		Product product= new Product("1234", "KneePad" , "Pad", "Soft inner lining", "Vicki" ,
+				"White",  "Oval",  "150rs", 20, 130.0, true,
+				deliveryDate);
+		assertEquals(product.toString(), productservice.addProduct(product).toString());
+		list.add(product);
+		
+		
 	}
 
 	@Test
@@ -47,7 +52,7 @@ public class ProductServiceTest {
 	@Test
 	void getIdTest1() {
 
-		assertEquals("Football Shoes", productservice.getProduct("1235").getProductName().toString());
+		assertEquals("BackPack", productservice.getProduct("1235").getProductName().toString());
 	}
 
 	@Test
@@ -63,7 +68,7 @@ public class ProductServiceTest {
 
 	@Test
 	void getSizeTest() {
-		assertEquals("5ft", productservice.getProduct("1235").getSize());
-	}
+		assertEquals(" full length", productservice.getProduct("1235").getSize());
+	}																																
 
 }

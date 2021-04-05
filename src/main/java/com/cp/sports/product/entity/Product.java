@@ -7,7 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 @Entity
 public class Product {
@@ -48,8 +48,8 @@ public class Product {
 	private boolean inStock;
 	private LocalDate estimatedDelivery;
 
-	@OneToMany(cascade = { CascadeType.ALL }, fetch = FetchType.EAGER)
-	@JoinColumn(name = "cartId", referencedColumnName = "ID")
+	@OneToOne(cascade = { CascadeType.ALL }, fetch = FetchType.EAGER)
+	@JoinColumn(name = "cartId", referencedColumnName = "cartId")
 	private Cart cart;
 
 	public String getProductId() {
