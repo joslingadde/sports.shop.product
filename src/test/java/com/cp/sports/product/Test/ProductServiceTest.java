@@ -18,28 +18,25 @@ import com.cp.sports.product.service.ProductService;
 public class ProductServiceTest {
 	@Autowired
 	private ProductService productservice;
-	
+
 	static ArrayList<Product> list = new ArrayList<>();
 
 	@Test
-	void updateProductTest()  {
-		Product uptest1= new Product( "1235", "BackPack" , "Bag", "Full space", "Levis" ,
-				"Burgundy",  " full length",  "790rs", 24, 450.0, true,
-				LocalDate.of(2021, 04, 12));
+	void updateProductTest() {
+		Product uptest1 = new Product("1235", "BackPack", "Bag", "Full space", "Levis", "Burgundy", " full length",
+				"790rs", 24, 450.0, true, LocalDate.of(2021, 04, 12));
 		assertEquals("1235", productservice.updateProduct("1235", uptest1).getProductId());
-		
+
 	}
 
 	@Test
 	void addProductTest() {
 		LocalDate deliveryDate = LocalDate.parse("2021-04-07");
-		Product product= new Product("1234", "KneePad" , "Pad", "Soft inner lining", "Vicki" ,
-				"White",  "Oval",  "150rs", 20, 130.0, true,
-				deliveryDate);
+		Product product = new Product("1234", "KneePad", "Pad", "Soft inner lining", "Vicki", "White", "Oval", "150rs",
+				20, 130.0, true, deliveryDate);
 		assertEquals(product.toString(), productservice.addProduct(product).toString());
 		list.add(product);
-		
-		
+
 	}
 
 	@Test
@@ -50,7 +47,7 @@ public class ProductServiceTest {
 	}
 
 	@Test
-	void getIdTest1() {
+	void getIdTest() {
 
 		assertEquals("BackPack", productservice.getProduct("1235").getProductName().toString());
 	}
@@ -69,6 +66,6 @@ public class ProductServiceTest {
 	@Test
 	void getSizeTest() {
 		assertEquals(" full length", productservice.getProduct("1235").getSize());
-	}																																
+	}
 
 }
