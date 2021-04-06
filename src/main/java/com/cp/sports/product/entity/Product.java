@@ -8,7 +8,12 @@ import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
-
+/**********
+ * @author G.Jolsin
+ * Description It is entity class for the Product module
+ * Version 1.0 
+ * Created Date 23-March-2021
+ **********/
 @Entity
 public class Product {
 	public Product() {
