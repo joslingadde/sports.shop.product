@@ -27,17 +27,6 @@ public class ProductServiceImpl implements ProductService {
 	@Autowired
 	private ProductRepository productdao;
 
-	@Override
-	public Product addProduct(Product product) {
-		Optional<Product> product1 = productdao.findById(product.getProductId());
-		if (product1.isEmpty()) {
-			return productdao.saveAndFlush(product);
-		} else {
-			throw new ProductServiceException("Product already exists");
-		}
-
-	}
-
 	/****************************
 	 * Method :addProduct Description :To add the Product to the database
 	 * 
@@ -47,15 +36,14 @@ public class ProductServiceImpl implements ProductService {
 	 *                                CreatedBy - G.Joslin Created Date -
 	 *                                23-MAR-2021
 	 ****************************/
-
 	@Override
-	public void removeProduct(String id) {
-		// TODO Auto-generated method stub
-		Optional<Product> product1 = productdao.findById(id);
+	public Product addProduct(Product product) {
+		Optional<Product> product1 = productdao.findById(product.getProductId());
 		if (product1.isEmpty()) {
-			throw new ProductServiceException("Product doesnt exist to delete");
-		} else
-			productdao.delete(product1.get());
+			return productdao.saveAndFlush(product);
+		} else {
+			throw new ProductServiceException("Product already exists");
+		}
 
 	}
 
@@ -70,14 +58,14 @@ public class ProductServiceImpl implements ProductService {
 	 ****************************/
 
 	@Override
-	public Product updateProduct(String id, Product product) {
+	public void removeProduct(String id) {
+		// TODO Auto-generated method stub
 		Optional<Product> product1 = productdao.findById(id);
 		if (product1.isEmpty()) {
-			throw new ProductServiceException("Product not found");
+			throw new ProductServiceException("Product doesnt exist to delete");
 		} else
-			productdao.save(product);
-		// TODO Auto-generated method stub
-		return product;
+			productdao.delete(product1.get());
+
 	}
 
 	/****************************
@@ -91,13 +79,14 @@ public class ProductServiceImpl implements ProductService {
 	 ****************************/
 
 	@Override
-	public Product getProduct(String id) throws ProductServiceException {
-		Optional<Product> product = productdao.findById(id);
-		if (product.isEmpty()) {
-			throw new ProductServiceException("Given product id does not exists");
-		}
+	public Product updateProduct(String id, Product product) {
+		Optional<Product> product1 = productdao.findById(id);
+		if (product1.isEmpty()) {
+			throw new ProductServiceException("Product not found");
+		} else
+			productdao.save(product);
 		// TODO Auto-generated method stub
-		return product.get();
+		return product;
 	}
 
 	/****************************
@@ -110,13 +99,13 @@ public class ProductServiceImpl implements ProductService {
 	 ****************************/
 
 	@Override
-	public List<Product> getAllProduct() {
-		// TODO Auto-generated method stub
-		List<Product> product = productdao.findAll();
+	public Product getProduct(String id) throws ProductServiceException {
+		Optional<Product> product = productdao.findById(id);
 		if (product.isEmpty()) {
-			throw new ProductServiceException("Products not found");
+			throw new ProductServiceException("Given product id does not exists");
 		}
-		return product;
+		// TODO Auto-generated method stub
+		return product.get();
 	}
 
 	/****************************
@@ -128,11 +117,10 @@ public class ProductServiceImpl implements ProductService {
 	 *                                 CreatedBy -G.Joslin Created Date -
 	 *                                 23-MAR-2021
 	 ****************************/
-
 	@Override
-	public List<Product> getProductsByName(String name) {
+	public List<Product> getAllProduct() {
 		// TODO Auto-generated method stub
-		List<Product> product = productdao.findByProductName(name);
+		List<Product> product = productdao.findAll();
 		if (product.isEmpty()) {
 			throw new ProductServiceException("Products not found");
 		}
@@ -144,6 +132,26 @@ public class ProductServiceImpl implements ProductService {
 	 * database
 	 * 
 	 * @param product -To fetch the product by name from the database
+	 * @returns Product - returns product after fetching the database
+	 * @throws ProductServiceException - It is raised when product does not found
+	 *                                 CreatedBy -G.Joslin Created Date -
+	 *                                 23-MAR-2021
+	 ****************************/
+	@Override
+	public List<Product> getProductsByName(String name) {
+		// TODO Auto-generated method stub
+		List<Product> product = productdao.findByProductName(name);
+		if (product.isEmpty()) {
+			throw new ProductServiceException("Products not found");
+		}
+		return product;
+	}
+
+	/****************************
+	 * Method :getProductsBySize Description :To get the product by size from the
+	 * database
+	 * 
+	 * @param product -To fetch the product by size from the database
 	 * @returns Product - returns product after fetching the database
 	 * @throws ProductServiceException - It is raised when product does not found
 	 *                                 CreatedBy -G.Joslin Created Date -
@@ -161,10 +169,10 @@ public class ProductServiceImpl implements ProductService {
 	}
 
 	/****************************
-	 * Method :getProductsBySize Description :To get the product by size from the
+	 * Method :getProductsByPrice Description :To get the product by price from the
 	 * database
 	 * 
-	 * @param product -To fetch the product by size from the database
+	 * @param product -To fetch the product by price from the database
 	 * @returns Product - returns product after fetching the database
 	 * @throws ProductServiceException - It is raised when product does not found
 	 *                                 CreatedBy -G.Joslin Created Date -
@@ -182,10 +190,10 @@ public class ProductServiceImpl implements ProductService {
 	}
 
 	/****************************
-	 * Method :getProductsByPrice Description :To get the product by price from the
+	 * Method :getProductsByColor Description :To get the product by color from the
 	 * database
 	 * 
-	 * @param product -To fetch the product by price from the database
+	 * @param product -To fetch the product by color from the database
 	 * @returns Product - returns product after fetching the database
 	 * @throws ProductServiceException - It is raised when product does not found
 	 *                                 CreatedBy -G.Joslin Created Date -
@@ -201,15 +209,5 @@ public class ProductServiceImpl implements ProductService {
 		}
 		return product;
 	}
-	/****************************
-	 * Method :getProductsByColor Description :To get the product by color from the
-	 * database
-	 * 
-	 * @param product -To fetch the product by color from the database
-	 * @returns Product - returns product after fetching the database
-	 * @throws ProductServiceException - It is raised when product does not found
-	 *                                 CreatedBy -G.Joslin Created Date -
-	 *                                 23-MAR-2021
-	 ****************************/
 
 }

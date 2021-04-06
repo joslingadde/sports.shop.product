@@ -23,19 +23,19 @@ public class ProductServiceTest {
 
 	/*******************
 	 * Method :updateProductTest Description : To test the updateProduct method of
-	 * the coupanservice Created By - G.Joslin Created Date - 22-March-2021
+	 * the productservice Created By - G.Joslin Created Date - 22-March-2021
 	 *******************/
 	@Test
 	void updateProductTest() {
-		Product uptest1 = new Product("1235", "BackPack", "Bag", "Full space", "Levis", "Burgundy", " full length",
+		Product uptest1 = new Product("1234", "BackPack", "Bag", "Full space", "Levis", "Burgundy", " full length",
 				"790rs", 24, 450.0, true, LocalDate.of(2021, 04, 12));
-		assertEquals("1235", productservice.updateProduct("1235", uptest1).getProductId());
+		assertEquals("1235", productservice.updateProduct("1234", uptest1).getProductId());
 
 	}
 
 	/*******************
 	 * Method :addProductTest Description : To test the addProduct method of the
-	 * coupanservice Created By - G.Joslin Created Date - 22-March-2021
+	 * productservice Created By - G.Joslin Created Date - 22-March-2021
 	 *******************/
 
 	@Test
@@ -50,56 +50,46 @@ public class ProductServiceTest {
 
 	/*******************
 	 * Method :deleteProductTest Description : To test the deleteProduct method of
-	 * the coupanservice Created By - G.Joslin Created Date - 22-March-2021
+	 * the productservice Created By - G.Joslin Created Date - 22-March-2021
 	 *******************/
 
 	@Test
 	void deleteTest() {
 		assertThrows(ProductServiceException.class, () -> {
-			productservice.removeProduct("1238");
+			productservice.removeProduct("1235");
 		});
 	}
 
 	/*******************
 	 * Method :getProductTest Description : To test the getProduct method of the
-	 * coupanservice Created By - G.Joslin Created Date - 22-March-2021
+	 * productservice Created By - G.Joslin Created Date - 22-March-2021
 	 *******************/
 
 	@Test
 	void getIdTest() {
 
-		assertEquals("BackPack", productservice.getProduct("1235").getProductName().toString());
+		assertEquals("Gloves", productservice.getProduct("1232").getProductName().toString());
 	}
 
 	/*******************
 	 * Method :getPriceTest Description : To test the getProduct by price method of
-	 * the coupanservice Created By - G.Joslin Created Date - 22-March-2021
+	 * the productservice Created By - G.Joslin Created Date - 22-March-2021
 	 *******************/
 
 	@Test
 	void getPriceTest() {
 
-		assertEquals(560.0, productservice.getProduct("1236").getPriceAfterDiscount());
+		assertEquals(200, productservice.getProduct("1239").getPriceAfterDiscount());
 	}
 
 	/*******************
 	 * Method :getColorTest Description : To test the getProduct by color method of
-	 * the coupanservice Created By - G.Joslin Created Date - 22-March-2021
+	 * the productservice Created By - G.Joslin Created Date - 22-March-2021
 	 *******************/
 
 	@Test
 	void getColorTest() {
-		assertEquals("Black", productservice.getProduct("1236").getColor());
-	}
-
-	/*******************
-	 * Method :getSizeTest Description : To test the getProduct by size method of
-	 * the coupanservice Created By - G.Joslin Created Date - 22-March-2021
-	 *******************/
-
-	@Test
-	void getSizeTest() {
-		assertEquals(" full length", productservice.getProduct("1235").getSize());
+		assertEquals("Blue", productservice.getProduct("1232").getColor());
 	}
 
 }

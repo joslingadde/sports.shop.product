@@ -34,12 +34,6 @@ public class ProductController {
 	@Autowired
 	private ProductService productservice;
 
-	@PostMapping("/product")
-	public ResponseEntity<Product> addProduct(@RequestBody Product product) {
-		Product resultProduct = productservice.addProduct(product);
-		return new ResponseEntity<Product>(resultProduct, HttpStatus.OK);
-	}
-
 	/****************************
 	 * Method : addProduct Description : To add the product to the database
 	 * 
@@ -53,9 +47,10 @@ public class ProductController {
 	 *                                 24-MAR-2021
 	 ****************************/
 
-	@DeleteMapping("/product/{id}")
-	public void deleteProduct(@PathVariable String id) throws ProductServiceException {
-		productservice.removeProduct(id);
+	@PostMapping("/product")
+	public ResponseEntity<Product> addProduct(@RequestBody Product product) {
+		Product resultProduct = productservice.addProduct(product);
+		return new ResponseEntity<Product>(resultProduct, HttpStatus.OK);
 	}
 
 	/****************************
@@ -70,11 +65,9 @@ public class ProductController {
 	 *                                 CreatedBy - G.Joslin Created Date -
 	 *                                 24-MAR-2021
 	 ****************************/
-
-	@PutMapping("/product/{id}")
-	public ResponseEntity<Product> updateProduct(@RequestBody Product product) {
-		Product resultProduct = productservice.updateProduct(product.getProductId(), product);
-		return new ResponseEntity<Product>(resultProduct, HttpStatus.OK);
+	@DeleteMapping("/product/{id}")
+	public void deleteProduct(@PathVariable String id) throws ProductServiceException {
+		productservice.removeProduct(id);
 	}
 
 	/****************************
@@ -86,10 +79,9 @@ public class ProductController {
 	 *                                CreatedBy - G.Joslin Created Date -
 	 *                                23-MAR-2021
 	 ****************************/
-
-	@GetMapping("/products/{id}")
-	public ResponseEntity<Product> findProduct(@PathVariable String id) throws ProductServiceException {
-		Product resultProduct = productservice.getProduct(id);
+	@PutMapping("/product/{id}")
+	public ResponseEntity<Product> updateProduct(@RequestBody Product product) {
+		Product resultProduct = productservice.updateProduct(product.getProductId(), product);
 		return new ResponseEntity<Product>(resultProduct, HttpStatus.OK);
 	}
 
@@ -102,6 +94,20 @@ public class ProductController {
 	 * @throws CoupanServiceException - It is raised when product does not exists
 	 *                                CreatedBy - G.JoslinCreated Date - 23-MAR-2021
 	 ****************************/
+	@GetMapping("/products/{id}")
+	public ResponseEntity<Product> findProduct(@PathVariable String id) throws ProductServiceException {
+		Product resultProduct = productservice.getProduct(id);
+		return new ResponseEntity<Product>(resultProduct, HttpStatus.OK);
+	}
+
+	/****************************
+	 * Method : getProduct Description : To get all the product from the database
+	 * 
+	 * @returns List<Product> - returns product after fetching the database
+	 * @throws ProductServiceException - It is raised when product does not found
+	 *                                 CreatedBy - G.Joslin Created Date -
+	 *                                 23-MAR-2021
+	 ****************************/
 
 	@GetMapping("/product/all")
 	public List<Product> getProducts() {
@@ -109,7 +115,8 @@ public class ProductController {
 	}
 
 	/****************************
-	 * Method : getProduct Description : To get all the product from the database
+	 * Method : getProductByName Description : To get the product by name from the
+	 * database
 	 * 
 	 * @returns List<Product> - returns product after fetching the database
 	 * @throws ProductServiceException - It is raised when product does not found
@@ -124,7 +131,7 @@ public class ProductController {
 	}
 
 	/****************************
-	 * Method : getProductByName Description : To get the product by name from the
+	 * Method : getProductBySize Description : To get the product by size from the
 	 * database
 	 * 
 	 * @returns List<Product> - returns product after fetching the database
@@ -139,7 +146,7 @@ public class ProductController {
 	}
 
 	/****************************
-	 * Method : getProductBySize Description : To get the product by size from the
+	 * Method : getProductByColor Description : To get the product by color from the
 	 * database
 	 * 
 	 * @returns List<Product> - returns product after fetching the database
@@ -154,8 +161,8 @@ public class ProductController {
 	}
 
 	/****************************
-	 * Method : getProductByColor Description : To get the product by color from the
-	 * database
+	 * Method : getProductByPrice Description : To get the product by price after
+	 * discount from the database
 	 * 
 	 * @returns List<Product> - returns product after fetching the database
 	 * @throws ProductServiceException - It is raised when product does not found
@@ -167,13 +174,5 @@ public class ProductController {
 	public List<Product> getProductsByPrice(@PathVariable double priceAfterDiscount) {
 		return productservice.getProductsByPrice(priceAfterDiscount);
 	}
-	/****************************
-	 * Method : getProductByPrice Description : To get the product by price after
-	 * discount from the database
-	 * 
-	 * @returns List<Product> - returns product after fetching the database
-	 * @throws ProductServiceException - It is raised when product does not found
-	 *                                 CreatedBy - G.Joslin Created Date -
-	 *                                 23-MAR-2021
-	 ****************************/
+
 }
