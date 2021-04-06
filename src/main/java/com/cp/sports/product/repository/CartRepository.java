@@ -12,6 +12,6 @@ import com.cp.sports.product.entity.Cart;
  **********/
 
 
-public interface CardRepository  extends JpaRepository<Cart, Long>{
+public interface CartRepository  extends JpaRepository<Cart, Long>{
 
 }
