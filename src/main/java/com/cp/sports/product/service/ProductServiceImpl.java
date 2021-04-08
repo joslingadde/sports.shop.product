@@ -11,11 +11,11 @@ import org.springframework.stereotype.Service;
 
 import com.cp.sports.product.entity.Product;
 import com.cp.sports.product.exception.ProductServiceException;
-import com.cp.sports.product.repository.ProductRepository;
+import com.cp.sports.product.repository.IProductRepository;
 
 @Service
-@Transactional
-@Repository
+//@Transactional
+
 /****************************
  * @author G.Joslin Description It is a service class that provides the services
  *         to add a Product, remove a Product, update a Product and get a
@@ -23,9 +23,9 @@ import com.cp.sports.product.repository.ProductRepository;
  * 
  *         Version 1.0 Created Date 24-March-2021
  ****************************/
-public class ProductServiceImpl implements ProductService {
+public class ProductServiceImpl implements IProductService {
 	@Autowired
-	private ProductRepository productdao;
+	private IProductRepository productdao;
 
 	/****************************
 	 * Method :addProduct Description :To add the Product to the database

@@ -5,7 +5,7 @@ import java.util.List;
 import com.cp.sports.product.entity.Product;
 import com.cp.sports.product.exception.ProductServiceException;
 
-public interface ProductService {
+public interface IProductService {
 
 	public Product addProduct(Product product);
 

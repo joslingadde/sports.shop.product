@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.cp.sports.product.entity.Product;
 import com.cp.sports.product.exception.ProductServiceException;
-import com.cp.sports.product.service.ProductService;
+import com.cp.sports.product.service.IProductService;
 
 import io.swagger.annotations.Api;
 
@@ -32,7 +32,7 @@ import io.swagger.annotations.Api;
  ****************************/
 public class ProductController {
 	@Autowired
-	private ProductService productservice;
+	private IProductService productservice;
 
 	/****************************
 	 * Method : addProduct Description : To add the product to the database

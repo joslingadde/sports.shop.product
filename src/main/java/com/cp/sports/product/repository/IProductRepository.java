@@ -13,7 +13,7 @@ import com.cp.sports.product.entity.Product;
  *Version: 1.0 
  *Created Date: 23-March-2021
  **********/
-public interface ProductRepository extends JpaRepository<Product, String> {
+public interface IProductRepository extends JpaRepository<Product, String> {
 	@Query("select p from Product p where p.productName="+"name")
 	List<Product> findByProductName(String name);
 	   
