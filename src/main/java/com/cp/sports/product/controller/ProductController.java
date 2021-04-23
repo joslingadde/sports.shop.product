@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -19,7 +20,7 @@ import com.cp.sports.product.exception.ProductServiceException;
 import com.cp.sports.product.service.IProductService;
 
 import io.swagger.annotations.Api;
-
+@CrossOrigin(origins="http://localhost:4200")
 @RestController
 @RequestMapping("/sports")
 @Api(value = "Swagger2DemoRestController")
@@ -47,7 +48,7 @@ public class ProductController {
 	 *                                 24-MAR-2021
 	 ****************************/
 
-	@PostMapping("/product")
+	@PostMapping("/addproduct")
 	public ResponseEntity<Product> addProduct(@RequestBody Product product) {
 		Product resultProduct = productservice.addProduct(product);
 		return new ResponseEntity<Product>(resultProduct, HttpStatus.OK);
@@ -65,7 +66,7 @@ public class ProductController {
 	 *                                 CreatedBy - G.Joslin Created Date -
 	 *                                 24-MAR-2021
 	 ****************************/
-	@DeleteMapping("/product/{id}")
+	@DeleteMapping("/delproduct/{id}")
 	public void deleteProduct(@PathVariable String id) throws ProductServiceException {
 		productservice.removeProduct(id);
 	}
@@ -79,7 +80,7 @@ public class ProductController {
 	 *                                CreatedBy - G.Joslin Created Date -
 	 *                                23-MAR-2021
 	 ****************************/
-	@PutMapping("/product/{id}")
+	@PutMapping("/upproduct/{id}")
 	public ResponseEntity<Product> updateProduct(@RequestBody Product product) {
 		Product resultProduct = productservice.updateProduct(product.getProductId(), product);
 		return new ResponseEntity<Product>(resultProduct, HttpStatus.OK);
@@ -94,7 +95,7 @@ public class ProductController {
 	 * @throws CoupanServiceException - It is raised when product does not exists
 	 *                                CreatedBy - G.JoslinCreated Date - 23-MAR-2021
 	 ****************************/
-	@GetMapping("/products/{id}")
+	@GetMapping("/getproduct/{id}")
 	public ResponseEntity<Product> findProduct(@PathVariable String id) throws ProductServiceException {
 		Product resultProduct = productservice.getProduct(id);
 		return new ResponseEntity<Product>(resultProduct, HttpStatus.OK);
@@ -124,7 +125,7 @@ public class ProductController {
 	 *                                 23-MAR-2021
 	 ****************************/
 
-	@GetMapping("/product1/{name}")
+	@GetMapping("/productname/{name}")
 	public List<Product> getProductsByName(@PathVariable String name) {
 
 		return productservice.getProductsByName(name);
@@ -140,7 +141,7 @@ public class ProductController {
 	 *                                 23-MAR-2021
 	 ****************************/
 
-	@GetMapping("/product2/{sizes}")
+	@GetMapping("/productsize/{sizes}")
 	public List<Product> getProductsBySize(@PathVariable String sizes) {
 		return productservice.getProductsBySize(sizes);
 	}
@@ -155,7 +156,7 @@ public class ProductController {
 	 *                                 23-MAR-2021
 	 ****************************/
 
-	@GetMapping("/product3/{color}")
+	@GetMapping("/productcolor/{color}")
 	public List<Product> getProductsByColor(@PathVariable String color) {
 		return productservice.getProductsByColor(color);
 	}
@@ -170,7 +171,7 @@ public class ProductController {
 	 *                                 23-MAR-2021
 	 ****************************/
 
-	@GetMapping("/product4/{priceAfterDiscount}")
+	@GetMapping("/productprice/{priceAfterDiscount}")
 	public List<Product> getProductsByPrice(@PathVariable double priceAfterDiscount) {
 		return productservice.getProductsByPrice(priceAfterDiscount);
 	}
