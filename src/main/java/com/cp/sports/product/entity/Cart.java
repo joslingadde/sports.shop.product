@@ -1,6 +1,8 @@
 package com.cp.sports.product.entity;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 /**********
  * @author G.Jolsin
@@ -24,6 +26,7 @@ public class Cart {
 		// TODO Auto-generated constructor stub
 	}
 	@Id
+	@GeneratedValue(strategy=GenerationType.TABLE)
 	private long cartId;
 	private String imageName;
 	private String productName;
